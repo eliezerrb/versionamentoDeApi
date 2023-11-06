@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsuperior.dsmovie.dto.MovieDTO;
+import com.devsuperior.dsmovie.dto.MovieGenreDTO;
 import com.devsuperior.dsmovie.services.MovieService;
 
 @RestController
@@ -23,8 +24,18 @@ public class MovieController {
 		return service.findAll(pageable);
 	}
 	
+	@GetMapping(produces = "application/vdn.eliezerrb.dsmovie-v1+json")
+	public Page<MovieGenreDTO> findAllV1(Pageable pageable) {
+		return service.findAllMovieGenre(pageable);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public MovieDTO findById(@PathVariable Long id) {
 		return service.findById(id);
+	}
+	
+	@GetMapping(value = "/{id}", produces = "application/vdn.eliezerrb.dsmovie-v1+json")
+	public MovieGenreDTO findByIdV1(@PathVariable Long id) {
+		return service.findByIdMovieGenre(id);
 	}
 }
